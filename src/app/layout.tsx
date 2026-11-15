@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from 'next';
 import { display, condensed, serif, sans } from './fonts';
 import { MotionProvider } from '@/lib/motion';
+import { site } from '@/site.config';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: { default: 'Why GTA VI', template: '%s · Why GTA VI' },
-  description: 'Long-form stories, told cinematically.',
+  title: { default: site.name, template: `%s · ${site.name}` },
+  description: site.description,
 };
 export const viewport: Viewport = { themeColor: '#0f0e1a', width: 'device-width', initialScale: 1 };
 
