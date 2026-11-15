@@ -20,7 +20,7 @@ items.forEach(([name, w, h], i) => {
 <radialGradient id="s" cx=".7" cy=".75" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
 <rect width="100%" height="100%" fill="url(#g)"/><circle cx="${w * 0.7}" cy="${h * 0.62}" r="${r * 0.28}" fill="url(#s)"/>
 <path d="M0 ${h * 0.82} Q ${w * 0.25} ${h * 0.74} ${w * 0.5} ${h * 0.8} T ${w} ${h * 0.78} V ${h} H 0 Z" fill="${c}" opacity=".55"/>
-<text x="50%" y="50%" fill="#fff" fill-opacity=".55" font-family="sans-serif" font-size="${r * 0.06}" text-anchor="middle" letter-spacing="${r * 0.01}">PLACEHOLDER · ${name.toUpperCase()}</text></svg>`;
+<text x="${r * 0.04}" y="${h - r * 0.04}" fill="#fff" fill-opacity=".5" font-family="sans-serif" font-size="${Math.max(14, r * 0.022)}" letter-spacing="2">PLACEHOLDER · ${name.toUpperCase()}</text></svg>`;
   fs.writeFileSync(`${out}/${name}.svg`, svg);
 });
 console.log(`wrote ${items.length} placeholders to ${out}`);
