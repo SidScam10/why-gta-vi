@@ -12,7 +12,7 @@ export function listSlugs(): string[] {
 }
 
 function attr(attrs: string, name: string): string | undefined {
-  const m = attrs.match(new RegExp(`\b${name}=(?:"([^"]*)"|'([^']*)')`));
+  const m = attrs.match(new RegExp(`\\b${name}=(?:"([^"]*)"|'([^']*)')`));
   return m ? (m[1] ?? m[2]) : undefined;
 }
 
