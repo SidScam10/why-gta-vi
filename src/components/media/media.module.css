@@ -1,0 +1,62 @@
+.figure { margin: 2.4em 0; }
+.figure img, .figure video { width: 100%; height: auto; background: var(--bg-night); }
+.media { position: relative; overflow: hidden; border-radius: 2px; }
+
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(8px, 1.5vw, 16px); }
+.pair img { aspect-ratio: 4 / 5; object-fit: cover; height: 100%; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(8px, 1.5vw, 16px); }
+.grid img { aspect-ratio: 4 / 3; object-fit: cover; }
+
+.bleed { margin: 3.5em 0; }
+.bleedMedia { position: relative; overflow: hidden; height: min(90svh, 62vw); min-height: 320px; }
+.bleedMedia img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; }
+.bleed figcaption { padding: 0 var(--gutter); max-width: calc(var(--col) + 2 * var(--gutter)); margin-inline: auto; }
+
+/* Mosaic */
+.mosaic { margin: 4em 0; display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: clamp(10px, 2vw, 24px); align-items: start; }
+.mcol { display: grid; gap: clamp(10px, 2vw, 24px); }
+.mcol:nth-child(2) { margin-top: 12vh; }
+.mcol:nth-child(3) { margin-top: 4vh; }
+.tile { position: relative; margin: 0; outline: 1px solid transparent; transition: outline-color 0.25s; }
+.tile:hover, .tile:focus-within { outline-color: var(--cream); outline-offset: 4px; }
+.tile img { width: 100%; height: auto; }
+.expand { position: absolute; right: 10px; bottom: 10px; width: 36px; height: 36px; border-radius: 50%; border: 0; background: rgb(15 14 26 / 0.7); color: var(--cream); display: grid; place-items: center; cursor: zoom-in; backdrop-filter: blur(6px); }
+.expand svg { width: 16px; height: 16px; }
+.tileCap { font-family: var(--font-sans), sans-serif; font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4em; }
+
+/* Video */
+.videoWrap { position: relative; }
+.ctrl { position: absolute; left: 12px; bottom: 12px; width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgb(255 255 255 / 0.3); background: rgb(15 14 26 / 0.65); color: #fff; cursor: pointer; display: grid; place-items: center; }
+.ctrl svg { width: 14px; height: 14px; }
+
+.facade { position: relative; aspect-ratio: 16 / 9; background: var(--bg-night); overflow: hidden; border-radius: 2px; }
+.facade img, .facade iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
+.play { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(180deg, transparent 40%, rgb(15 14 26 / 0.7)); border: 0; cursor: pointer; color: #fff; }
+.playBtn { display: inline-flex; align-items: center; gap: 12px; background: var(--accent); color: #1a0f1c; border-radius: 999px; padding: 12px 22px 12px 16px; font-family: var(--font-sans), sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; transition: transform 0.2s var(--ease); }
+.play:hover .playBtn, .play:focus-visible .playBtn { transform: scale(1.06); }
+.playBtn svg { width: 18px; height: 18px; }
+.vtitle { position: absolute; left: 16px; top: 14px; right: 16px; font-family: var(--font-sans), sans-serif; font-size: 0.85rem; text-align: left; text-shadow: 0 1px 6px #000; }
+.empty { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 24px; border: 1px dashed var(--rule); font-family: var(--font-sans), sans-serif; font-size: 0.85rem; color: var(--text-muted); }
+.empty code { color: var(--accent); }
+
+/* Sticky scene */
+.scene { margin: 4em 0; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 4vw, 64px); }
+.sceneVisual { position: sticky; top: calc(var(--header-h) + 4vh); height: calc(100svh - var(--header-h) - 8vh); }
+.sceneVisual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 2px; opacity: 0; transition: opacity 0.6s var(--ease); }
+.sceneVisual img.on { opacity: 1; }
+.steps { padding: 30vh 0; }
+.step { min-height: 70svh; display: flex; align-items: center; opacity: 0.35; transition: opacity 0.4s; }
+.step.on { opacity: 1; }
+.stepBox { background: rgb(15 14 26 / 0.6); border-left: 3px solid var(--accent); padding: 1.2em 1.4em; }
+.stepBox p:last-child { margin-bottom: 0; }
+.stepImg { display: none; }
+
+@media (max-width: 760px) {
+  .mosaic { grid-template-columns: 1fr; }
+  .mcol { margin-top: 0 !important; }
+  .scene { grid-template-columns: 1fr; }
+  .sceneVisual { display: none; }
+  .steps { padding: 0; }
+  .step { min-height: 0; opacity: 1; display: block; margin-bottom: 2em; }
+  .stepImg { display: block; width: 100%; margin-bottom: 1em; }
+}

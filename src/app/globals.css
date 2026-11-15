@@ -1,0 +1,89 @@
+/* ===== Design tokens (per-article overrides come from frontmatter `theme`) ===== */
+:root {
+  --bg-ink: #0f0e1a;
+  --bg-night: #2c284b;
+  --bg-from: var(--bg-ink);
+  --bg-to: var(--bg-night);
+  --text: #ece8f5;
+  --text-muted: #b9b2cf;
+  --accent: #ff6fb5;
+  --accent-2: #ff8a5c;
+  --cream: #f2e6b6;
+  --grad-headline: linear-gradient(90deg, var(--accent-2), var(--accent));
+  --rule: rgb(236 232 245 / 0.15);
+
+  --col: 65ch;
+  --col-wide: min(1100px, 92vw);
+  --gutter: clamp(16px, 4vw, 48px);
+  --header-h: 56px;
+  --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--header-h); }
+html[data-motion='on'] { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg-ink);
+  color: var(--text);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(17px, 1.05rem + 0.2vw, 20px);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+img, video, svg { display: block; max-width: 100%; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; border-radius: 2px; }
+button { font: inherit; color: inherit; }
+
+.skip-link { position: absolute; left: 8px; top: -100px; z-index: 1000; background: var(--cream); color: #111; padding: 8px 12px; }
+.skip-link:focus { top: 8px; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ===== Article grid: col (reading), wide (breakouts), full (bleed) ===== */
+.prose {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--gutter), 1fr)
+    [wide-start] minmax(0, calc((var(--col-wide) - min(var(--col), 100%)) / 2))
+    [col-start] min(var(--col), 100% - 2 * var(--gutter)) [col-end]
+    minmax(0, calc((var(--col-wide) - min(var(--col), 100%)) / 2)) [wide-end]
+    minmax(var(--gutter), 1fr) [full-end];
+}
+.prose > * { grid-column: col; }
+.prose > .wide { grid-column: wide; }
+.prose > .full { grid-column: full; }
+
+.prose p { margin: 0 0 1.25em; }
+.prose h2 { font-family: var(--font-condensed), sans-serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3rem); letter-spacing: 0.02em; line-height: 1; color: var(--cream); margin: 1.6em 0 0.5em; }
+.prose h3 { font-family: var(--font-sans), sans-serif; font-size: 1.05em; color: var(--accent); margin: 1.8em 0 0.4em; }
+.prose em { font-style: italic; }
+.prose blockquote { margin: 1.5em 0; padding-left: 1em; border-left: 3px solid var(--accent); color: var(--text-muted); }
+.prose ul, .prose ol { padding-left: 1.2em; margin: 0 0 1.25em; }
+.prose hr { border: 0; height: 1px; background: var(--rule); margin: 3em 0; }
+
+/* Drop cap: first paragraph of the article and the first paragraph after each chapter opener */
+.prose > p:first-of-type::first-letter,
+.prose > [data-chapter] + p::first-letter {
+  font-family: var(--font-display), serif;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--accent);
+  float: left;
+  font-size: 4.2em;
+  line-height: 0.8;
+  padding: 0.08em 0.1em 0 0;
+}
+@supports (initial-letter: 3) {
+  .prose > p:first-of-type::first-letter,
+  .prose > [data-chapter] + p::first-letter { float: none; font-size: inherit; line-height: inherit; padding: 0 0.12em 0 0; initial-letter: 3; -webkit-initial-letter: 3; }
+}
+
+/* Small UI type */
+.caption { font-family: var(--font-sans), sans-serif; font-size: 0.78rem; line-height: 1.45; color: var(--text-muted); margin-top: 0.7em; }
+.caption .credit { font-style: italic; opacity: 0.8; margin-left: 0.4em; }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } }
