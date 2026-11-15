@@ -8,8 +8,11 @@ import { VideoLoop } from '@/components/media/VideoLoop';
 import { YouTube } from '@/components/media/YouTube';
 import { StickyScene, Step } from '@/components/scenes/StickyScene';
 
+/** Inline emphasis written as ==word== in articles. */
+const Hl = ({ children }: { children?: React.ReactNode }) => <mark className="hl">{children}</mark>;
+
 export const mdxComponents = {
-  Chapter, PullQuote, Figure, FigurePair, FigureGrid, FullBleed, Mosaic, VideoLoop, YouTube, StickyScene, Step,
+  Chapter, PullQuote, Figure, FigurePair, FigureGrid, FullBleed, Mosaic, VideoLoop, YouTube, StickyScene, Step, Hl,
   a: (p: React.AnchorHTMLAttributes<HTMLAnchorElement>) =>
     /^https?:/.test(p.href ?? '') ? <a {...p} target="_blank" rel="noopener noreferrer" /> : <a {...p} />,
 };

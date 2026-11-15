@@ -20,12 +20,12 @@ export function Pic({ src, alt, width, height, eager }: Img & { eager?: boolean 
   return <img src={withBase(src)} alt={alt ?? ''} width={width} height={height} loading={eager ? 'eager' : 'lazy'} decoding="async" />;
 }
 
-/** Inset image at reading-column width (add `wide` to break out slightly). */
-export function Figure({ wide, ...img }: Img & { wide?: boolean }) {
+/** Inset image at reading-column width (`wide` breaks out; `narrow` caps it at a fixed width for small source images). */
+export function Figure({ wide, narrow, ...img }: Img & { wide?: boolean; narrow?: boolean }) {
   const ref = useRef<HTMLElement>(null);
   useReveal(ref);
   return (
-    <figure ref={ref} className={`${s.figure} ${wide ? 'wide' : ''}`}>
+    <figure ref={ref} className={`${s.figure} ${wide ? 'wide' : ''} ${narrow ? s.narrow : ''}`}>
       <div className={s.media}><Pic {...img} /></div>
       <Caption caption={img.caption} credit={img.credit} />
     </figure>

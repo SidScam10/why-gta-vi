@@ -8,7 +8,7 @@ import s from './media.module.css';
 
 const Lightbox = dynamic(() => import('./Lightbox'), { ssr: false });
 
-/** Offset multi-column image mosaic; columns drift at different speeds; every tile opens a lightbox. */
+/** Offset multi-column image mosaic; columns drift at different speeds; clicking any image opens the lightbox. */
 export function Mosaic({ images, columns = 3 }: { images: Img[]; columns?: 2 | 3 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(-1);
@@ -34,9 +34,11 @@ export function Mosaic({ images, columns = 3 }: { images: Img[]; columns?: 2 | 3
         <div className={s.mcol} data-col key={ci}>
           {col.map(({ im, i }) => (
             <figure className={s.tile} key={i}>
-              <Pic {...im} />
-              <button type="button" className={s.expand} onClick={() => setIndex(i)} aria-label={`Expand image: ${im.alt}`}>
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="M10 2h4v4M6 14H2v-4M14 2 9 7M2 14l5-5" /></svg>
+              <button type="button" className={s.tileBtn} onClick={() => setIndex(i)} aria-label={`Open image: ${im.alt}`}>
+                <Pic {...im} />
+                <span className={s.expand} aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M10 2h4v4M6 14H2v-4M14 2 9 7M2 14l5-5" /></svg>
+                </span>
               </button>
               {im.caption && <figcaption className={s.tileCap}>{im.caption}</figcaption>}
             </figure>

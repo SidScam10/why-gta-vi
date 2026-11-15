@@ -60,3 +60,10 @@
   .step { min-height: 0; opacity: 1; display: block; margin-bottom: 2em; }
   .stepImg { display: block; width: 100%; margin-bottom: 1em; }
 }
+
+/* Source images smaller than the column (e.g. 526px) are capped so they stay sharp */
+.narrow { width: min(100%, 540px); margin-left: auto; margin-right: auto; }
+
+/* Mosaic: the whole tile is the click target */
+.tileBtn { position: relative; display: block; width: 100%; padding: 0; margin: 0; border: 0; background: none; cursor: zoom-in; }
+.tileBtn:focus-visible { outline: 2px solid var(--cream); outline-offset: 4px; }

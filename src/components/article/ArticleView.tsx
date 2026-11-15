@@ -1,5 +1,6 @@
 import { compileMDX } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
+import remarkHighlight from '@/lib/remark-highlight';
 import { getArticle } from '@/lib/articles';
 import { mdxComponents } from '@/mdx-components';
 import { site } from '@/site.config';
@@ -14,7 +15,7 @@ export async function ArticleView({ slug }: { slug: string }) {
     source: body,
     components: mdxComponents,
     // Articles are first-party content, so allow JS expressions in props (e.g. images={[...]}).
-    options: { blockJS: false, mdxOptions: { remarkPlugins: [remarkGfm] } },
+    options: { blockJS: false, mdxOptions: { remarkPlugins: [remarkGfm, remarkHighlight] } },
   });
   return (
     <ArticleShell chapters={chapters} theme={meta.theme} siteName={site.name}>
