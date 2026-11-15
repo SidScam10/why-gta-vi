@@ -87,3 +87,14 @@ button { font: inherit; color: inherit; }
 .caption .credit { font-style: italic; opacity: 0.8; margin-left: 0.4em; }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } }
+
+/* ===== Tables: centred, solid accent (same pink as ### headings) ===== */
+.prose > table { grid-column: wide; width: 100%; border-collapse: collapse; margin: 2.2em 0; font-family: var(--font-sans), sans-serif; font-size: 0.92rem; line-height: 1.4; text-align: center; }
+.prose table th, .prose table td { border: 1px solid var(--accent); padding: 0.75em 0.9em; text-align: center; vertical-align: middle; }
+.prose table th { font-family: var(--font-condensed), sans-serif; font-weight: 400; font-size: 1.2rem; letter-spacing: 0.04em; color: var(--cream); background: rgb(255 111 181 / 0.08); }
+.prose table td { color: var(--text); }
+.prose table em { color: var(--cream); }
+@media (max-width: 760px) { .prose > table { display: block; overflow-x: auto; } }
+
+/* ===== Emphasis: ==word== in articles, same accent as ### headings ===== */
+.prose mark.hl { background: none; color: var(--accent); font-weight: inherit; padding: 0; }
